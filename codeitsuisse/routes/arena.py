@@ -2,6 +2,7 @@ import logging
 import json
 import requests
 import time
+from sseclient import SSEClient
 
 from flask import request, jsonify, Response, render_template, Flask
 
@@ -18,23 +19,26 @@ def evaluateArena():
     battleId = data.get("battleId")
     URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
     print(URL)
-    generator = stream(URL)
-    for msg in generator:
-        print(msg)
-        time.sleep(1.0)
+    msgs = SSEClient("https://codeitsuisse-bear-tissue-px.herokuapp.com/listen")
+    for m in msgs:
+        print(m)
 
     return json.dumps(payload)
 
-def get_message(URL):
+def get_message():
     '''this could be any function that blocks until data is ready'''
-    requests.get(url=URL)
     time.sleep(1.0)
     s = time.ctime(time.time())
     return s
 
+@app.route('/listen', methods=['GET'])
 def stream(URL):
     def eventStream():
+        # messages = requests.get(URL)
+        test = requests.get(URL)
+        print("eventstream", requests.get(URL))
         while True:
+            get_message()
             # wait for source data to be available, then push it
-            yield 'data: {}\n\n'.format(get_message(URL))
+            yield 'data: {}\n\n'.format(test)
     return Response(eventStream(), mimetype="text/event-stream")
