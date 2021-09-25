@@ -19,8 +19,10 @@ def evaluateArena():
     battleId = data.get("battleId")
     URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
     print(URL)
-    test = requests.get(url=URL).json()
-    print(test)
+    while True:
+        test = requests.get(url=URL).json()
+        print(test)
+        time.sleep(1.0)
     '''
     print(test)
     generator = stream(URL)
