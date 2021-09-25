@@ -73,10 +73,12 @@ def evaluateArena():
                 print("valid")
                 grid[loc] = player
                 if not make_request(payload, URL):
+                    print("valid reply failed")
                     return json.dumps(None)
             else:
                 print("invalid")
                 if not make_request(invalid, URL):
+                    print("invalid reply failed")
                     return json.dumps(None)
         time.sleep(1.0)
 
