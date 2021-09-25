@@ -12,12 +12,13 @@ logger = logging.getLogger(__name__)
 payload = { "action": "putSymbol", "position": "SE" }
 invalid = { "action": "(╯°□°)╯︵ ┻━┻" }
 
-@app.route('/arena', methods=['POST'])
+@app.route('/tic-tac-toe', methods=['POST'])
 def evaluateArena():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
     battleId = data.get("battleId")
-    URL = "https://cis2021-arena.herokuapp.com/quoridor/start/" + battleId 
+    URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
+    print(URL)
     test = requests.get(url=URL).json()
     print(test)
     '''
