@@ -125,7 +125,7 @@ def evaluateStonks():
     data = request.get_json()
     cases = parse(data)
     f = open("stonks.js", "a")
-    f.write(data)
+    f.write(str(data))
     f.close()
 
     all_actions = []
