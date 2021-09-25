@@ -1,7 +1,6 @@
 import logging
 import json
 import requests
-import queue
 import time
 
 from flask import request, jsonify, Response, render_template, Flask
@@ -19,16 +18,10 @@ def evaluateArena():
     battleId = data.get("battleId")
     URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
     print(URL)
-    for i in range(1000):
-        print(requests.get(url=URL).content)
-        time.sleep(1.0)
-
-    '''
     generator = stream(URL)
     for msg in generator:
         print(msg)
         time.sleep(1.0)
-        '''
 
     return json.dumps(payload)
 
