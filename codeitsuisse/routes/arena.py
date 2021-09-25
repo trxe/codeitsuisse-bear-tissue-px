@@ -82,8 +82,10 @@ def evaluateArena():
         if 'youAre' in msg:
             myId = msg['youAre']
             print(myId)
+            '''
             if (myId == 'O'):
                 make_post(payload, URLplay)
+            '''
         elif 'winner' in msg:
             return end_game
         elif not 'action' in msg:
