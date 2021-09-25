@@ -124,7 +124,7 @@ def earn(pair, capital, name):
 def evaluateStonks():
     data = request.get_json()
     cases = parse(data)
-    f = open("stonks.js", "a")
+    f = open("stonks.json", "w")
     f.write(str(data))
     f.close()
 
