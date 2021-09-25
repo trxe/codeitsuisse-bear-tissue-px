@@ -1,6 +1,5 @@
 import logging
 import json
-import requests
 
 from flask import request, jsonify
 
@@ -19,11 +18,6 @@ def evaluateDecoder():
     print(num_slots)
     print(history)
     guess = values[0:num_slots]
-    input = json.dumps({"answer" : guess})
-    #output = {"output_received": None, "result" : 0}
-    requests.post(input)
-    output = request.get_json()
-    print(output)
 
     logging.info("My guess :{}".format(guess))
-    return input
+    return json.dumps({"answer" : guess})
