@@ -20,7 +20,7 @@ def isValid(grid, loc, player):
     return True
 
 def make_request(reply, URL) -> bool:
-    result = requests.post(URL, data=reply, timeout=3.0)
+    result = requests.post(URL, data=reply, timeout=1.0)
     if result.status_code == requests.codes.ok: 
         print("ok liao")
         return True
@@ -55,18 +55,18 @@ def evaluateArena():
     for msg in messages:
         if initial == None:
             initial = json.loads(msg.__str__())
-            print(initial)
             myId = initial['youAre']
-            print(myId)
             if (myId != 'O'):
                 if not make_request(payload, URL):
                     print("init failed")
                     return json.dumps(None)
         else:
+            print("my round")
+            make_request(payload, URL)
+            '''
             action = json.loads(msg.__str__())
             if (action['action'] != 'putSymbol'):
                 return json.dumps(None)
-            print(action)
             loc = action['position']
             player = action['player']
             if isValid(grid, loc, player):
@@ -80,6 +80,7 @@ def evaluateArena():
                 if not make_request(invalid, URL):
                     print("invalid reply failed")
                     return json.dumps(None)
+            '''
         time.sleep(1.0)
 
     return json.dumps(None)
