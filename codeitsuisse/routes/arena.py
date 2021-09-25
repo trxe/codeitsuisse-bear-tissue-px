@@ -18,14 +18,16 @@ def evaluateArena():
     print(battleId)
     URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
     print(URL)
+    '''
     test = requests.get(url=URL).json()
     print(test)
     generator = stream(URL)
     for msg in generator:
         print(msg)
         time.sleep(1.0)
+    '''
 
-    return test
+    return json.dumps(None)
 
 def get_message(URL):
     '''this could be any function that blocks until data is ready'''
@@ -34,7 +36,6 @@ def get_message(URL):
     s = time.ctime(time.time())
     return s
 
-@app.route('/stream')
 def stream(URL):
     def eventStream():
         while True:
