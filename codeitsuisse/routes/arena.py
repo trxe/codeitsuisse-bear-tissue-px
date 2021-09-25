@@ -52,8 +52,10 @@ def tests(loc, me, you):
         print(mgrid[pl['position']])
     print_grid(mgrid)
 
+'''
 tests('SE', 'O', 'X')
 tests('SW', 'O', 'X')
+'''
 
 @app.route('/tic-tac-toe', methods=['POST'])
 def evaluateArena():
@@ -80,10 +82,6 @@ def evaluateArena():
         if 'youAre' in msg:
             myId = msg['youAre']
             print(myId)
-            if (myId == 'X'):
-                if not make_post(payload, URLplay):
-                    print("init failed")
-                    return end_game
             continue
         elif 'winner' in msg:
             return end_game
