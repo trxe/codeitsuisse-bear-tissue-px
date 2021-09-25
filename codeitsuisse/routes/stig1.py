@@ -11,5 +11,7 @@ logger = logging.getLogger(__name__)
 def evaluateStig1():
     data = request.get_json()
     for i in data:
-        print(i)
+        print(i["coefficients"])
+        print(i["maxRating"])
+        print(i["question"][0])
     return json.dumps(None)
