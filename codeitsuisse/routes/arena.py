@@ -15,6 +15,7 @@ def evaluateArena():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
     battleId = data.get("battleId")
+    print(battleId)
     URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
     while True:
         requests.get(url=URL)
