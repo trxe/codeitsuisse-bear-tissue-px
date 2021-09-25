@@ -20,7 +20,7 @@ def evaluateDecoder():
         print(h)
     inc = 2
     guess = list(range(inc, num_slots + inc))
-    guess = [3, 2, 0, 1, 6]
+    guess = [0, 2, 3, 5, 6]
     guess = [values[i] for i in guess]
 
     logging.info("My guess :{}".format(guess))
