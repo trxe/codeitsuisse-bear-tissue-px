@@ -93,13 +93,14 @@ def evaluateArena():
                 print("you flipped me")
                 return end_game
             loc = msg['position']
-            you = msg['player']
+            player = msg['player']
             if is_valid(grid, loc):
-                grid[loc] = you
+                grid[loc] = player
+                if player == myId:
+                    continue
+                # if it is my turn to go
                 if not is_valid(grid, payload['position']):
                     modify_position(payload, grid)
-                print("i play:", payload)
-                grid[payload['position']] = myId
                 make_post(payload, URLplay)
             else:
                 make_post(invalid, URLplay)
