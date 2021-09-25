@@ -124,6 +124,10 @@ def earn(pair, capital, name):
 def evaluateStonks():
     data = request.get_json()
     cases = parse(data)
+    f = open("stonks.js", "a")
+    f.write(data)
+    f.close()
+
     all_actions = []
     for case in cases:
         print("new case")
