@@ -6,55 +6,14 @@ from flask import request, jsonify
 from codeitsuisse import app
 
 logger = logging.getLogger(__name__)
-
-def parse(data):
-    cases = [Case(i['energy'], i['capital'], i['timeline']) for i in data]
-    return cases
-
-def earn(firm, buy, sell) -> int:
-    return firm[buy].qty * (firm[sell].price - firm[buy].price)
-
-def check(name, case, max_energy): 
-    firm = case.filter(name)
-    size = len(firm)
-    if (size < 1):
-        return 0
-    buy = 0
-    sell = 0 # max element
-    max_diff = earn(firm, buy, sell)
-    energy = 0
-    for i in range(1, size):
-        if energy > max_energy:
-            return max_diff
-
-        diff = earn(firm, i, sell)
-        if (diff > max_diff):
-            max_diff = diff
-            buy = i
-        if (firm[i].price > firm[sell].price):
-            sell = i
-        
-        energy = buy - sell
-
-    return max_diff
-
-
-@app.route('/stonks', methods=['POST'])
-def evaluateStonks():
-    data = request.get_json()
-    logging.info("data sent for evaluation {}".format(data))
-    cases = parse(data)
-    for case in cases:
-        print(case)
-        # print(check("Apple", case, case.energy))
-    return json.dumps(3)
+INF = 10000000
 
 # CLASS DEFINITIONS
 class Case:
     def __init__(self, energy, capital, timeline) -> None:
         self.energy = energy
         self.capital = capital
-        self.timeline = timeline
+        self.timeline = [Year(timeline[y], y) for y in timeline]
     
     def __repr__(self) -> str:
         return str(self.energy) + " " + str(self.capital) + " " + str(self.timeline)
@@ -71,6 +30,14 @@ class Case:
         out.sort(key=lambda x: x.year, reverse=True)
         return out
 
+class Year:
+    def __init__(self, stocks, year) -> None:
+        self.year = int(year)
+        self.stocks = {name:Stock(details, name, year) for (name,details) in stocks.items()}
+
+    def __repr__(self) -> str:
+        return ">" + str(self.year) + ": " + str(self.stocks)
+
 class Stock:
     def __init__(self, raw, name, year) -> None:
         self.name = name
@@ -80,6 +47,45 @@ class Stock:
     
     def __repr__(self) -> str:
         return "{" + self.name + ": " + str(self.year) + " | "  + str(self.price) + " | " + str(self.qty) + "}"
+
+class Firm:
+    def __init__(self, stock) -> None:
+        # list of trades (buy, sell)
+        self.trades = [];
+        self.curr = (None, stock)
+        self.curr_price = (stock.price, stock.price)
+
+    def curr_buy_price(self) -> int:
+        return self.curr_price[0];
+
+    def curr_sell_price(self) -> int:
+        return self.curr_price[1];
     
-    def toJSON(self) -> str:
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+    def set_buy(self):
+        pass
+
+
+def parse(data):
+    cases = [Case(i['energy'], i['capital'], i['timeline']) for i in data]
+    return cases
+
+def earn(firm, buy, sell) -> int:
+    return firm[buy].qty * (firm[sell].price - firm[buy].price)
+
+def check(case):
+    max_en = case.energy / 2
+    en = 0
+    timeline = case.timeline
+    size = len(timeline)
+    db = {name : None for (name, stock) in timeline[0].stocks.items()}
+    print(db)
+
+@app.route('/stonks', methods=['POST'])
+def evaluateStonks():
+    data = request.get_json()
+    logging.info("data sent for evaluation {}".format(data))
+    cases = parse(data)
+    for case in cases:
+        check(case)
+        # print(check("Apple", case, case.energy))
+    return json.dumps(3)

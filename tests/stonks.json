@@ -1,10 +1,15 @@
 [
-    {"energy": 6, "capital": 250, "timeline": {"2037": {"Apple": {"price": 102, "qty": 39
-                }, "BitCoin": {"price": 349, "qty": 64
-                }
-            }, "2034": {"Apple": {"price": 113, "qty": 54
-                }, "BitCoin": {"price": 298, "qty": 42
-                }
+    {
+        "energy": 6, 
+        "capital": 250,
+        "timeline": {
+            "2037": {
+                "Apple": {"price": 102, "qty": 39},
+                "BitCoin": {"price": 349, "qty": 64}
+            },
+            "2034": {
+                "Apple": {"price": 113, "qty": 54},
+                "BitCoin": {"price": 298, "qty": 42}
             }
         }
     },
@@ -305,10 +310,7 @@
                 }, "CreditSuisse": {"price": 25, "qty": 95
                 }, "Apple": {"price": 111, "qty": 11
                 }, "Intel": {"price": 57, "qty": 83
-                }, "Hewl
-
-2021-09-25T05: 15: 21.485060+00: 00 app[web.1
-                ]: ettPackard": {"price": 30, "qty": 67
+                }, "HewlettPackard": {"price": 30, "qty": 67
                 }, "Google": {"price": 684, "qty": 78
                 }, "DogeCoin": {"price": 66, "qty": 40
                 }, "Ethereum": {"price": 32, "qty": 11
@@ -586,10 +588,7 @@
                 }, "JPMorgan": {"price": 85, "qty": 35
                 }, "Apple": {"price": 115, "qty": 39
                 }, "BitCoin": {"price": 282, "qty": 18
-                }, "CreditSuisse"
-
-2021-09-25T05: 15: 21.485060+00: 00 app[web.1
-                ]: : {"price": 26, "qty": 52
+                }, "CreditSuisse" : {"price": 26, "qty": 52
                 }, "HewlettPackard": {"price": 29, "qty": 92
                 }, "Google": {"price": 688, "qty": 98
                 }
