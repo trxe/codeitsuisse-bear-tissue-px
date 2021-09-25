@@ -9,6 +9,8 @@ from flask import request, jsonify, Response, render_template, Flask
 from codeitsuisse import app
 
 logger = logging.getLogger(__name__)
+payload = { "action": "putSymbol", "position": "SE" }
+invalid = { "action": "(╯°□°)╯︵ ┻━┻" }
 
 @app.route('/arena', methods=['POST'])
 def evaluateArena():
@@ -27,7 +29,7 @@ def evaluateArena():
         time.sleep(1.0)
     '''
 
-    return json.dumps(None)
+    return json.dumps(payload)
 
 def get_message(URL):
     '''this could be any function that blocks until data is ready'''
