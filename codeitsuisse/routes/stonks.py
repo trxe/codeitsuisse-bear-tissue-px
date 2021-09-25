@@ -33,6 +33,8 @@ def check(name, case, max_energy):
             buy = i
         if (firm[i].price > firm[sell].price):
             sell = i
+        
+        energy = buy - sell
 
     return max_diff
 
@@ -43,7 +45,8 @@ def evaluateStonks():
     logging.info("data sent for evaluation {}".format(data))
     cases = parse(data)
     for case in cases:
-        print(check("Apple", case, case.energy))
+        print(case)
+        # print(check("Apple", case, case.energy))
     return json.dumps(3)
 
 # CLASS DEFINITIONS

@@ -1,0 +1,41 @@
+[{
+ "energy":4,
+ "capital":500,
+ "timeline":{
+   "2037":{
+     "Apple":{
+       "price":100,
+       "qty":10
+     }
+   },
+   "2036":{
+     "Apple":{
+       "price":10,
+       "qty":50
+      },
+      "Microsoft":{
+       "price":10,
+       "qty":50
+      }
+   },
+   "2035":{
+     "Apple":{
+       "price":80,
+       "qty":6
+     }
+   },
+   "2034":{
+     "Apple":{
+       "price":2,
+       "qty":2
+     }
+   },
+   "2033":{
+     "Apple":{
+       "price":2,
+       "qty":200
+     }
+   }
+ }
+}
+]
