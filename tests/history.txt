@@ -1,0 +1,243 @@
+2021-09-25 13:04:50,738 root         INFO     data sent for evaluation {'battleId': '16f5e856-3dba-4dec-895a-dfd901bd2e0e'}
+https://cis2021-arena.herokuapp.com/tic-tac-toe/start/16f5e856-3dba-4dec-895a-dfd901bd2e0e
+- - -
+- - -
+- - -
+{'youAre': 'O', 'id': '16f5e856-3dba-4dec-895a-dfd901bd2e0e'}
+O
+- - -
+- - -
+- - -
+{'action': 'putSymbol', 'position': 'NW', 'player': 'X'}
+423 Locked
+r]: at=info method=POST path="/tic-tac-toe" host=codeitsuisse-bear-tissue-px.herokuapp.com request_id=cc6ba6ea-33ef-45fd-a7f6-fd5968cb30d3 fwd="44.193.39.66" dyno=web.1 connect=0ms service=2134ms status=200 bytes=163 protocol=https
+X - -
+- - -
+- - -
+{'player': 'O', 'action': 'putSymbol', 'position': 'SE'}
+{'action': '(â\x95¯Â°â\x96¡Â°)â\x95¯ï¸µ â\x94»â\x94\x81â\x94»', 'player': 'X'}
+you flipped me
+10.1.33.251 - - [25/Sep/2021:13:04:52 +0000] "POST /tic-tac-toe HTTP/1.1" 200 4 "-" "axios/0.21.1"
+2021-09-25 13:04:52,878 root         INFO     data sent for evaluation {'battleId': '4f4470bc-faf0-48b5-a591-cb4ec2e3499d'}
+https://cis2021-arena.herokuapp.com/tic-tac-toe/start/4f4470bc-faf0-48b5-a591-cb4ec2e3499d
+- - -
+- - -
+- - -
+{'youAre': 'O', 'id': '4f4470bc-faf0-48b5-a591-cb4ec2e3499d'}
+O
+- - -
+- - -
+- - -
+{'player': 'O', 'action': 'putSymbol', 'position': 'SE'}
+{'action': 'putSymbol', 'position': 'SE', 'player': 'X'}
+invalid move detected
+- - -
+- - -
+- - O
+{'player': 'O', 'action': '(â\x95¯Â°â\x96¡Â°)â\x95¯ï¸µ â\x94»â\x94\x81â\x94»'}
+you flipped me
+10.1.84.159 - - [25/Sep/2021:13:04:54 +0000] "POST /tic-tac-toe HTTP/1.1" 200 4 "-" "axios/0.21.1"
+2021-09-25 13:04:54,979 root         INFO     data sent for evaluation {'battleId': 'a0edff4e-7d65-47a9-894e-1b59dcd203b8'}
+https://cis2021-arena.herokuapp.com/tic-tac-toe/start/a0edff4e-7d65-47a9-894e-1b59dcd203b8
+- - -
+- - -
+- - -
+{'youAre': 'O', 'id': 'a0edff4e-7d65-47a9-894e-1b59dcd203b8'}
+O
+r]: at=info method=POST path="/tic-tac-toe" host=codeitsuisse-bear-tissue-px.herokuapp.com request_id=80336424-f66c-4270-9fd1-7c5e0c4aff8a fwd="44.193.39.66" dyno=web.1 connect=0ms service=2088ms status=200 bytes=163 protocol=https
+- - -
+- - -
+- - -
+{'player': 'O', 'action': 'putSymbol', 'position': 'SE'}
+{'action': 'putSymbol', 'position': '', 'player': 'X'}
+invalid move detected
+r]: at=info method=POST path="/tic-tac-toe" host=codeitsuisse-bear-tissue-px.herokuapp.com request_id=ec64e12f-6e95-4b42-b365-b397e16425ac fwd="44.193.39.66" dyno=web.1 connect=0ms service=2088ms status=200 bytes=163 protocol=https
+- - -
+- - -
+- - O
+{'player': 'O', 'action': '(â\x95¯Â°â\x96¡Â°)â\x95¯ï¸µ â\x94»â\x94\x81â\x94»'}
+you flipped me
+10.1.45.227 - - [25/Sep/2021:13:04:57 +0000] "POST /tic-tac-toe HTTP/1.1" 200 4 "-" "axios/0.21.1"
+2021-09-25 13:04:57,080 root         INFO     data sent for evaluation {'battleId': '48776dd2-18f8-412d-9339-dd333e0702f8'}
+https://cis2021-arena.herokuapp.com/tic-tac-toe/start/48776dd2-18f8-412d-9339-dd333e0702f8
+- - -
+- - -
+- - -
+{'youAre': 'O', 'id': '48776dd2-18f8-412d-9339-dd333e0702f8'}
+O
+- - -
+- - -
+- - -
+{'player': 'O', 'action': 'putSymbol', 'position': 'SE'}
+{'action': 'putSymbol', 'position': 'NW', 'player': 'X'}
+X - -
+- - -
+- - O
+{'player': 'O', 'action': 'putSymbol', 'position': 'N'}
+{'action': 'putSymbol', 'position': 'NE', 'player': 'X'}
+X O X
+- - -
+- - O
+{'player': 'O', 'action': 'putSymbol', 'position': 'W'}
+{'action': 'putSymbol', 'position': 'C', 'player': 'X'}
+X O X
+O X -
+- - O
+{'player': 'O', 'action': 'putSymbol', 'position': 'E'}
+{'action': 'putSymbol', 'position': 'SW', 'player': 'X'}
+423 Locked
+r]: at=info method=POST path="/tic-tac-toe" host=codeitsuisse-bear-tissue-px.herokuapp.com request_id=ad66f171-bbbe-4662-a2a0-f5fe5d1417e7 fwd="44.193.39.66" dyno=web.1 connect=0ms service=6026ms status=200 bytes=163 protocol=https
+X O X
+O X O
+X - O
+{'winner': 'X'}
+10.1.58.233 - - [25/Sep/2021:13:05:03 +0000] "POST /tic-tac-toe HTTP/1.1" 200 4 "-" "axios/0.21.1"
+2021-09-25 13:05:03,125 root         INFO     data sent for evaluation {'battleId': '421c2570-5867-4cbd-8017-f1a7ba45369c'}
+https://cis2021-arena.herokuapp.com/tic-tac-toe/start/421c2570-5867-4cbd-8017-f1a7ba45369c
+- - -
+- - -
+- - -
+{'youAre': 'X', 'id': '421c2570-5867-4cbd-8017-f1a7ba45369c'}
+X
+- - -
+- - -
+- - -
+{'action': 'putSymbol', 'position': 'NW', 'player': 'O'}
+O - -
+- - -
+- - -
+{'player': 'X', 'action': 'putSymbol', 'position': 'S'}
+{'action': 'putSymbol', 'position': 'N', 'player': 'O'}
+O O -
+- - -
+- X -
+{'player': 'X', 'action': 'putSymbol', 'position': 'NE'}
+{'action': 'putSymbol', 'position': 'W', 'player': 'O'}
+O O X
+O - -
+- X -
+{'player': 'X', 'action': 'putSymbol', 'position': 'C'}
+{'action': 'putSymbol', 'position': 'E', 'player': 'O'}
+r]: at=info method=POST path="/tic-tac-toe" host=codeitsuisse-bear-tissue-px.herokuapp.com request_id=a8862ec2-3678-4861-8a04-5c106b685128 fwd="44.193.39.66" dyno=web.1 connect=0ms service=5178ms status=200 bytes=163 protocol=https
+O O X
+O X O
+- X -
+{'player': 'X', 'action': 'putSymbol', 'position': 'SW'}
+{'winner': 'X'}
+10.1.63.42 - - [25/Sep/2021:13:05:08 +0000] "POST /tic-tac-toe HTTP/1.1" 200 4 "-" "axios/0.21.1"
+2021-09-25 13:05:08,318 root         INFO     data sent for evaluation {'battleId': '697f409e-e562-4eb3-964f-1dd4578316eb'}
+https://cis2021-arena.herokuapp.com/tic-tac-toe/start/697f409e-e562-4eb3-964f-1dd4578316eb
+- - -
+- - -
+- - -
+{'youAre': 'O', 'id': '697f409e-e562-4eb3-964f-1dd4578316eb'}
+O
+- - -
+- - -
+- - -
+{'player': 'O', 'action': 'putSymbol', 'position': 'SW'}
+{'action': 'putSymbol', 'position': 'NW', 'player': 'X'}
+X - -
+- - -
+O - -
+{'player': 'O', 'action': 'putSymbol', 'position': 'N'}
+{'action': 'putSymbol', 'position': 'NE', 'player': 'X'}
+X O X
+- - -
+O - -
+{'player': 'O', 'action': 'putSymbol', 'position': 'W'}
+{'action': 'putSymbol', 'position': 'C', 'player': 'X'}
+X O X
+O X -
+O - -
+{'player': 'O', 'action': 'putSymbol', 'position': 'E'}
+{'action': 'putSymbol', 'position': 'S', 'player': 'X'}
+X O X
+O X O
+O X -
+{'player': 'O', 'action': 'putSymbol', 'position': 'SE'}
+{'winner': 'DRAW'}
+10.1.19.168 - - [25/Sep/2021:13:05:13 +0000] "POST /tic-tac-toe HTTP/1.1" 200 4 "-" "axios/0.21.1"
+2021-09-25 13:05:13,497 root         INFO     data sent for evaluation {'battleId': '3538bce9-467d-4f51-87c9-ee26da7238d7'}
+https://cis2021-arena.herokuapp.com/tic-tac-toe/start/3538bce9-467d-4f51-87c9-ee26da7238d7
+- - -
+- - -
+- - -
+{'youAre': 'X', 'id': '3538bce9-467d-4f51-87c9-ee26da7238d7'}
+X
+r]: at=info method=POST path="/tic-tac-toe" host=codeitsuisse-bear-tissue-px.herokuapp.com request_id=5c6ce74d-7a45-4aba-aabd-32a488f6c036 fwd="44.193.39.66" dyno=web.1 connect=0ms service=5161ms status=200 bytes=163 protocol=https
+- - -
+- - -
+- - -
+{'action': 'putSymbol', 'position': 'NW', 'player': 'O'}
+O - -
+- - -
+- - -
+{'player': 'X', 'action': 'putSymbol', 'position': 'SE'}
+{'action': 'putSymbol', 'position': 'N', 'player': 'O'}
+O O -
+- - -
+- - X
+{'player': 'X', 'action': 'putSymbol', 'position': 'NE'}
+{'action': 'putSymbol', 'position': 'W', 'player': 'O'}
+O O X
+O - -
+- - X
+{'player': 'X', 'action': 'putSymbol', 'position': 'C'}
+{'action': 'putSymbol', 'position': 'SW', 'player': 'O'}
+423 Locked
+r]: at=info method=POST path="/tic-tac-toe" host=codeitsuisse-bear-tissue-px.herokuapp.com request_id=95d9e867-e90d-4870-86d9-67337ea9f5fb fwd="44.193.39.66" dyno=web.1 connect=0ms service=5152ms status=200 bytes=163 protocol=https
+O O X
+O X -
+O - X
+{'winner': 'O'}
+10.1.57.119 - - [25/Sep/2021:13:05:18 +0000] "POST /tic-tac-toe HTTP/1.1" 200 4 "-" "axios/0.21.1"
+2021-09-25 13:05:18,675 root         INFO     data sent for evaluation {'battleId': '5cb7d56a-2de4-46db-94f6-b2515a98db77'}
+https://cis2021-arena.herokuapp.com/tic-tac-toe/start/5cb7d56a-2de4-46db-94f6-b2515a98db77
+- - -
+- - -
+- - -
+{'youAre': 'O', 'id': '5cb7d56a-2de4-46db-94f6-b2515a98db77'}
+O
+r]: at=info method=POST path="/tic-tac-toe" host=codeitsuisse-bear-tissue-px.herokuapp.com request_id=7946cfd0-1ca3-448d-b902-de94cc63a2f9 fwd="44.193.39.66" dyno=web.1 connect=0ms service=1073ms status=200 bytes=163 protocol=https
+- - -
+- - -
+- - -
+{'player': 'O', 'action': 'putSymbol', 'position': 'SE'}
+{'action': '(â\x95¯Â°â\x96¡Â°)â\x95¯ï¸µ â\x94»â\x94\x81â\x94»', 'player': 'X'}
+you flipped me
+10.1.84.159 - - [25/Sep/2021:13:05:19 +0000] "POST /tic-tac-toe HTTP/1.1" 200 4 "-" "axios/0.21.1"
+2021-09-25 13:05:19,762 root         INFO     data sent for evaluation {'battleId': '3265e291-46e2-4b49-acd5-c3273fc268c2'}
+https://cis2021-arena.herokuapp.com/tic-tac-toe/start/3265e291-46e2-4b49-acd5-c3273fc268c2
+- - -
+- - -
+- - -
+{'youAre': 'X', 'id': '3265e291-46e2-4b49-acd5-c3273fc268c2'}
+X
+- - -
+- - -
+- - -
+{'action': 'putSymbol', 'position': 'NW', 'player': 'O'}
+O - -
+- - -
+- - -
+{'player': 'X', 'action': 'putSymbol', 'position': 'E'}
+{'action': 'putSymbol', 'position': 'W', 'player': 'O'}
+O - -
+O - X
+- - -
+{'action': 'putSymbol', 'position': 'N', 'player': 'O'}
+423 Locked
+O O -
+O - X
+- - -
+{'player': 'X', 'action': 'putSymbol', 'position': 'N'}
+invalid move detected
+423 Locked
+r]: at=info method=POST path="/tic-tac-toe" host=codeitsuisse-bear-tissue-px.herokuapp.com request_id=65d1b7ff-91b3-4cba-b548-06e0312d59f7 fwd="44.193.39.66" dyno=web.1 connect=0ms service=5169ms status=200 bytes=163 protocol=https
+O O -
+O - X
+- - -
+{'action': '(â\x95¯Â°â\x96¡Â°)â\x95¯ï¸µ â\x94»â\x94\x81â\x94»', 'player': 'O'}
+you flipped me
+10.1.46.89 - - [25/Sep/2021:13:05:24 +0000] "POST /tic-tac-toe HTTP/1.1" 200 4 "-" "axios/0.21.1"
