@@ -97,24 +97,28 @@ def earn(pair, capital, name):
     buy = pair[0]
     sell = pair[1]
     qty = (capital - capital % buy['price']) / buy['price']
+    if qty == 0:
+        return 0, [], 0
     val = qty * (sell['price'] - buy['price'])
     log = ["j-{}-{}".format(sell['year'], buy['year']), "b-{}-{}".format(name, qty)]
     log.extend(["j-{}-{}".format(buy['year'], sell['year']), "s-{}-{}".format(name, qty)])
-    return qty*buy['price'], log
+    return qty*buy['price'], log, val
 
 @app.route('/stonks', methods=['POST'])
 def evaluateStonks():
     data = request.get_json()
     cases = parse(data)
-    actions = []
+    all_actions = []
     for case in cases:
+        actions = []
         firms = getAllFirms(case.timeline, {})
         track_all(case.energy / 2, case.timeline, firms)
         for (f, firm) in firms.items():
-            print(f, firm.trades)
             for c in firm.trades:
-                cost , action = earn(c, case.capital, f)
-                if cost <= case.capital: 
+                cost, action, profit = earn(c, case.capital, f)
+                print(profit)
+                if profit != 0 and cost <= case.capital: 
                     case.capital -= cost
-                    actions.append(action)
-    return Response(json.dumps(actions), mimetype="application/json")
+                    actions.extend(action)
+        all_actions.append(actions)
+    return Response(json.dumps(all_actions), mimetype="application/json")
