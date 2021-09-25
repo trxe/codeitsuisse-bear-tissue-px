@@ -22,11 +22,22 @@ def isValid(grid, loc, player):
 def make_request(reply, URL) -> bool:
     result = requests.post(URL, data=reply)
     if result.status_code == requests.codes.ok: 
-        print("ok liao")
         return True
     else:
         print(result.status_code, result.reason)
         return False
+
+def modify_position(loc, payload, grid):
+    if loc == payload['posiition']:
+        for pos in grid:
+            if grid['pos'] == '-':
+                payload['position'] = pos
+                break
+
+
+def print_grid(grid):
+    output = '{} {} {}\n{} {} {}\n{} {} {}'.format(grid['NW'], grid['W'], grid['NE'], grid['W'], grid['C'], grid['E'], grid['SW'], grid['S'], grid['SE'])
+    print(output)
 
 
 @app.route('/tic-tac-toe', methods=['POST'])
@@ -44,7 +55,7 @@ def evaluateArena():
     'SE': '-', 
     }
     initial = None
-    myId = "O"
+    myId = 'O'
 
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
@@ -70,13 +81,12 @@ def evaluateArena():
             loc = action['position']
             player = action['player']
             if isValid(grid, loc, player):
-                print("valid")
                 grid[loc] = player
+                modify_position(loc, payload, grid)
                 if not make_request(payload, URLplay):
                     print("valid reply failed")
                     return json.dumps(None)
             else:
-                print("invalid")
                 if not make_request(invalid, URLplay):
                     print("invalid reply failed")
                     return json.dumps(None)
