@@ -30,7 +30,7 @@ def make_request(reply, URL) -> bool:
 def modify_position(loc, payload, grid):
     if loc == payload['position']:
         for pos in grid:
-            if grid['pos'] == '-':
+            if grid[pos] == '-':
                 payload['position'] = pos
                 break
 
