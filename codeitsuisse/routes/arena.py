@@ -11,15 +11,16 @@ from codeitsuisse import app
 logger = logging.getLogger(__name__)
 payload = { "action": "putSymbol", "position": "SE" }
 invalid = { "action": "(╯°□°)╯︵ ┻━┻" }
+end_game = json.dumps(None)
 
-def isValid(grid, loc, player):
+def is_valid(grid, loc, player):
     if not loc in grid:
         return False
     if grid[loc] != '-':
         return False
     return True
 
-def make_request(reply, URL) -> bool:
+def make_post(reply, URL) -> bool:
     result = requests.post(URL, data=reply)
     if result.status_code == requests.codes.ok: 
         return True
@@ -27,69 +28,63 @@ def make_request(reply, URL) -> bool:
         print(result.status_code, result.reason)
         return False
 
-def modify_position(loc, payload, grid):
-    if loc == payload['position']:
-        for pos in grid:
-            if grid[pos] == '-':
-                payload['position'] = pos
-                break
-
+def modify_position(payload, grid):
+    for pos in grid:
+        if grid[pos] == '-':
+            payload['position'] = pos
+            break
 
 def print_grid(grid):
     output = '{} {} {}\n{} {} {}\n{} {} {}'.format(grid['NW'], grid['W'], grid['NE'], grid['W'], grid['C'], grid['E'], grid['SW'], grid['S'], grid['SE'])
     print(output)
 
-
 @app.route('/tic-tac-toe', methods=['POST'])
 def evaluateArena():
-    global payload, invalid
-    grid = {
-    'NW': '-', 
-    'N': '-', 
-    'NE': '-', 
-    'W': '-', 
-    'C': '-', 
-    'E': '-', 
-    'SW': '-', 
-    'S': '-', 
-    'SE': '-', 
-    }
-    initial = None
+    global payload, invalid, end_game
+    grid = { 'NW': '-', 'N': '-', 'NE': '-', 
+    'W': '-', 'C': '-', 'E': '-', 
+    'SW': '-', 'S': '-', 'SE': '-', }
     myId = 'O'
+    print_grid(grid)
 
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
     battleId = data.get("battleId")
     URLstart = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
-    print(URLstart)
     URLplay = "https://cis2021-arena.herokuapp.com/tic-tac-toe/play/" + battleId 
+    print(URLstart)
     messages = SSEClient(URLstart)
-    for msg in messages:
-        if initial == None:
-            initial = json.loads(msg.__str__())
-            myId = initial['youAre']
+    for rawmsg in messages:
+        msg = json.loads(rawmsg.__str__())
+        print(msg)
+        if 'youAre' in msg:
+            myId = msg['youAre']
             print(myId)
             if (myId != 'O'):
-                if not make_request(payload, URLplay):
+                if not make_post(payload, URLplay):
                     print("init failed")
-                    return json.dumps(None)
-        else:
-            action = json.loads(msg.__str__())
-            if 'winner' in action or action['action'] != 'putSymbol':
-                return json.dumps(None)
-            print(action)
-            loc = action['position']
-            player = action['player']
-            if isValid(grid, loc, player):
+                    return end_game
+            continue
+        elif 'winner' in msg:
+            return end_game
+        elif not 'action' in msg:
+            make_post(invalid, URLplay)
+        else: # player in message
+            # they flipped me
+            if msg['action'] != 'putSymbol':
+                print("you flipped me")
+                return end_game
+            loc = msg['position']
+            player = msg['player']
+            if is_valid(grid, loc, player):
                 grid[loc] = player
-                modify_position(loc, payload, grid)
-                if not make_request(payload, URLplay):
-                    print("valid reply failed")
-                    return json.dumps(None)
+                if not is_valid(grid, payload['position'], myId):
+                    modify_position(payload, grid)
+                grid[payload['position']] = myId
+                make_post(payload, URLplay)
             else:
-                if not make_request(invalid, URLplay):
-                    print("invalid reply failed")
-                    return json.dumps(None)
+                make_post(invalid, URLplay)
         time.sleep(1.0)
+        print_grid(grid)
 
-    return json.dumps(None)
+    return end_game
