@@ -58,7 +58,7 @@ def evaluateArena():
             print(initial)
             myId = initial['youAre']
             print(myId)
-            if (myId == 'O'):
+            if (myId != 'O'):
                 if not make_request(payload, URL):
                     print("init failed")
                     return json.dumps(None)
