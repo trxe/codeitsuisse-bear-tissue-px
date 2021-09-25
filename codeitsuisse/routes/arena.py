@@ -19,6 +19,16 @@ def isValid(grid, loc, player):
         return False
     return True
 
+def make_request(reply, URL) -> bool:
+    result = requests.post(URL, data=reply, timeout=3.0)
+    if result.status_code == requests.codes.ok: 
+        print("ok liao")
+        return True
+    else:
+        print(result.status_code, result.reason)
+        return False
+
+
 @app.route('/tic-tac-toe', methods=['POST'])
 def evaluateArena():
     global payload, invalid
@@ -49,13 +59,9 @@ def evaluateArena():
             myId = initial['youAre']
             print(myId)
             if (myId == 'O'):
-                result = requests.post(URL, data=payload, timeout=3.0)
-                if result.status_code == requests.codes.ok: 
-                    print("ok liao")
-                else:
-                    print(result.status_code, result.reason)
+                if not make_request(payload, URL):
+                    print("init failed")
                     return json.dumps(None)
-
         else:
             action = json.loads(msg.__str__())
             if (action['action'] != 'putSymbol'):
@@ -66,10 +72,12 @@ def evaluateArena():
             if isValid(grid, loc, player):
                 print("valid")
                 grid[loc] = player
-                requests.post(URL, data=payload, timeout=3.0)
+                if not make_request(payload, URL):
+                    return json.dumps(None)
             else:
                 print("invalid")
-                requests.post(URL, data=invalid, timeout=3.0)
+                if not make_request(invalid, URL):
+                    return json.dumps(None)
         time.sleep(1.0)
 
     return json.dumps(None)
