@@ -17,11 +17,10 @@ def evaluateArena():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
     battleId = data.get("battleId")
-    print(battleId)
-    URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
-    print(URL)
-    '''
+    URL = "https://cis2021-arena.herokuapp.com/quoridor/start/" + battleId 
     test = requests.get(url=URL).json()
+    print(test)
+    '''
     print(test)
     generator = stream(URL)
     for msg in generator:
