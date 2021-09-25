@@ -19,24 +19,9 @@ def evaluateArena():
     battleId = data.get("battleId")
     URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
     print(URL)
-    response = stream(URL)
-    print(response)
+    messages = SSEClient(URL)
+    for msg in messages:
+        print(msg)
+        time.sleep(1.0)
 
     return json.dumps(payload)
-
-def get_message():
-    '''this could be any function that blocks until data is ready'''
-    time.sleep(1.0)
-    s = time.ctime(time.time())
-    return s
-
-def stream(URL):
-    def eventStream():
-        # messages = requests.get(URL)
-        test = requests.get(URL)
-        print("eventstream", requests.get(URL))
-        while True:
-            get_message()
-            # wait for source data to be available, then push it
-            yield 'data: {}\n\n'.format(test)
-    return Response(eventStream(), mimetype="text/event-stream")
