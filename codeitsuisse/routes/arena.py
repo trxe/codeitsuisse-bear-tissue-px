@@ -20,7 +20,7 @@ def isValid(grid, loc, player):
     return True
 
 def make_request(reply, URL) -> bool:
-    result = requests.post(URL, data=reply, timeout=1.0)
+    result = requests.post(URL, data=reply)
     if result.status_code == requests.codes.ok: 
         print("ok liao")
         return True
@@ -49,20 +49,21 @@ def evaluateArena():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
     battleId = data.get("battleId")
-    URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
-    print(URL)
-    messages = SSEClient(URL)
+    URLstart = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
+    print(URLstart)
+    URLplay = "https://cis2021-arena.herokuapp.com/tic-tac-toe/play/" + battleId 
+    messages = SSEClient(URLstart)
     for msg in messages:
         if initial == None:
             initial = json.loads(msg.__str__())
             myId = initial['youAre']
             if (myId != 'O'):
-                if not make_request(payload, URL):
+                if not make_request(payload, URLplay):
                     print("init failed")
                     return json.dumps(None)
         else:
             print("my round")
-            make_request(payload, URL)
+            make_request(payload, URLplay)
             '''
             action = json.loads(msg.__str__())
             if (action['action'] != 'putSymbol'):
