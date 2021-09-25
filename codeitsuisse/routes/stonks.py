@@ -110,13 +110,14 @@ def evaluateStonks():
     cases = parse(data)
     all_actions = []
     for case in cases:
+        print("new case")
         actions = []
         firms = getAllFirms(case.timeline, {})
         track_all(case.energy / 2, case.timeline, firms)
         for (f, firm) in firms.items():
             for c in firm.trades:
+                print(f, c)
                 cost, action, profit = earn(c, case.capital, f)
-                print(profit)
                 if profit != 0 and cost <= case.capital: 
                     case.capital -= cost
                     actions.extend(action)
