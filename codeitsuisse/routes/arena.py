@@ -17,10 +17,7 @@ def evaluateArena():
     battleId = data.get("battleId")
     print(battleId)
     URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
-    while True:
-        requests.get(url=URL)
-        time.sleep(1)
-        pass
+    print(URL)
 
 def get_message():
     '''this could be any function that blocks until data is ready'''
