@@ -104,6 +104,7 @@ def evaluateArena():
                     modify_position(payload, grid)
                 make_post(payload, URLplay)
             else:
+                print("invalid move detected")
                 make_post(invalid, URLplay)
         time.sleep(1.0)
         print_grid(grid)
