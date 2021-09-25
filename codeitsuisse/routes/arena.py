@@ -19,9 +19,8 @@ def evaluateArena():
     battleId = data.get("battleId")
     URL = "https://cis2021-arena.herokuapp.com/tic-tac-toe/start/" + battleId 
     print(URL)
-    msgs = SSEClient("https://codeitsuisse-bear-tissue-px.herokuapp.com/listen")
-    for m in msgs:
-        print(m)
+    response = stream(URL)
+    print(response)
 
     return json.dumps(payload)
 
@@ -31,7 +30,6 @@ def get_message():
     s = time.ctime(time.time())
     return s
 
-@app.route('/listen', methods=['GET'])
 def stream(URL):
     def eventStream():
         # messages = requests.get(URL)
