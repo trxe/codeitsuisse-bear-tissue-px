@@ -24,6 +24,9 @@ class Trade:
     def __init__(self, buy, sell) -> None:
         self.buy = buy
         self.sell = sell
+
+    def year_start(self) -> int:
+        return self.buy['year']
     
     def __eq__(self, other) -> bool:
         return self.buy == other.buy and self.sell == other.sell
@@ -124,9 +127,7 @@ def earn(pair, capital, name):
 def evaluateStonks():
     data = request.get_json()
     cases = parse(data)
-    f = open("stonks.json", "w")
-    f.write(str(data))
-    f.close()
+    print(data)
 
     all_actions = []
     for case in cases:

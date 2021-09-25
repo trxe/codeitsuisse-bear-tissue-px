@@ -5,3 +5,4 @@ import codeitsuisse.routes.decoder
 import codeitsuisse.routes.arena
 import codeitsuisse.routes.stonks
 import codeitsuisse.routes.stig1
+import codeitsuisse.routes.optopt
