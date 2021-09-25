@@ -11,14 +11,13 @@ logger = logging.getLogger(__name__)
 def evaluateDecoder():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
-    input = data.get("input")
-    values = input['possible_values']
-    num_slots = input['num_slots']
-    history = input['history']
-    result = None
+    values = data["possible_values"]
+    num_slots = data["num_slots"]
+    history = data["history"]
+    print(values)
+    print(num_slots)
+    print(history)
+    guess = values[0:num_slots]
 
-    logging.info("My result :{}".format(result))
-    return json.dumps(result)
-
-
-
+    logging.info("My guess :{}".format(guess))
+    return json.dumps({"answer" : guess})
