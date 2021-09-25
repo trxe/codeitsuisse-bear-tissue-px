@@ -20,7 +20,7 @@ def evaluateDecoder():
         print(h)
     guess = [3, 3, 3, 1, 1]
     guess = [values[i] for i in guess]
-    guess = ['h', 'h', 'h', 'c', 'h']
+    guess = ['h', 'b', 'b', 'c', 'b']
 
     logging.info("My guess :{}".format(guess))
     return json.dumps({"answer" : guess})
