@@ -57,31 +57,29 @@ def evaluateArena():
         if initial == None:
             initial = json.loads(msg.__str__())
             myId = initial['youAre']
+            print(myId)
             if (myId != 'O'):
                 if not make_request(payload, URLplay):
                     print("init failed")
                     return json.dumps(None)
         else:
-            print("my round")
-            make_request(payload, URLplay)
-            '''
             action = json.loads(msg.__str__())
             if (action['action'] != 'putSymbol'):
                 return json.dumps(None)
+            print(action)
             loc = action['position']
             player = action['player']
             if isValid(grid, loc, player):
                 print("valid")
                 grid[loc] = player
-                if not make_request(payload, URL):
+                if not make_request(payload, URLplay):
                     print("valid reply failed")
                     return json.dumps(None)
             else:
                 print("invalid")
-                if not make_request(invalid, URL):
+                if not make_request(invalid, URLplay):
                     print("invalid reply failed")
                     return json.dumps(None)
-            '''
         time.sleep(1.0)
 
     return json.dumps(None)
