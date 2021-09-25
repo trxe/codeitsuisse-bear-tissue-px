@@ -28,7 +28,7 @@ def make_request(reply, URL) -> bool:
         return False
 
 def modify_position(loc, payload, grid):
-    if loc == payload['posiition']:
+    if loc == payload['position']:
         for pos in grid:
             if grid['pos'] == '-':
                 payload['position'] = pos
