@@ -19,6 +19,23 @@ class Case:
     
     def toJSON(self) -> str:
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+    
+class Trade:
+    def __init__(self, buy, sell) -> None:
+        self.buy = buy
+        self.sell = sell
+    
+    def __eq__(self, other) -> bool:
+        return self.buy == other.buy and self.sell == other.sell
+    
+    def compare(self, other) -> int:
+        return self.buy['year'] - other.buy['year']
+
+    def __repr__(self) -> str:
+        return "buy: {}, sell: {}".format(self.buy, self.sell)
+    
+    def __hash__(self) -> int:
+        return hash(self.__repr__())
 
 class Firm:
     def __init__(self) -> None:
@@ -45,13 +62,12 @@ class Firm:
             return None
         if self.curr_min['year'] >= self.curr_max['year']:
             return None
-        t = (self.curr_min, self.curr_max)
+        t = Trade(self.curr_min, self.curr_max)
         self.trades.append(t)
         return t
 
     def __repr__(self) -> str:
         return "min: {}, max: {}, trades: {}".format(self.curr_min, self.curr_max, self.trades)
-    
 
 def parse(data) -> list:
     cases = [Case(i['energy'], i['capital'], i['timeline']) for i in data]
@@ -94,8 +110,8 @@ def track(energy, timeline, firms, year):
     track(energy - (year - year_num), timeline[1:], firms, year_num)
 
 def earn(pair, capital, name):
-    buy = pair[0]
-    sell = pair[1]
+    buy = pair.buy
+    sell = pair.sell
     qty = (capital - capital % buy['price']) / buy['price']
     if qty == 0:
         return 0, [], 0
@@ -115,6 +131,7 @@ def evaluateStonks():
         firms = getAllFirms(case.timeline, {})
         track_all(case.energy / 2, case.timeline, firms)
         for (f, firm) in firms.items():
+            firm.trades = list(dict.fromkeys(firm.trades))
             for c in firm.trades:
                 print(f, c)
                 cost, action, profit = earn(c, case.capital, f)
