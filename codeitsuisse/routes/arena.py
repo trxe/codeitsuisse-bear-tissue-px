@@ -75,7 +75,7 @@ def evaluateArena():
                     return json.dumps(None)
         else:
             action = json.loads(msg.__str__())
-            if (action['action'] != 'putSymbol'):
+            if 'winner' in action or action['action'] != 'putSymbol':
                 return json.dumps(None)
             print(action)
             loc = action['position']
