@@ -1,3 +1,5 @@
+from codeitsuisse.routes.stonks_old import Year
+from datetime import time
 import logging
 import json
 
@@ -6,86 +8,101 @@ from flask import request, jsonify
 from codeitsuisse import app
 
 logger = logging.getLogger(__name__)
-INF = 10000000
 
-# CLASS DEFINITIONS
 class Case:
     def __init__(self, energy, capital, timeline) -> None:
         self.energy = energy
         self.capital = capital
-        self.timeline = [Year(timeline[y], y) for y in timeline]
+        self.timeline = [(int(year), stocks) for (year,stocks) in timeline.items()]
     
     def __repr__(self) -> str:
-        return str(self.energy) + " " + str(self.capital) + " " + str(self.timeline)
+        return "energy: {},\ncapital: {},\ntimeline: {}".format(self.energy, self.capital, self.timeline)
     
     def toJSON(self) -> str:
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
-    def filter(self, stock_name) -> dict:
-        out = []
-        for year_num in self.timeline:
-            year = self.timeline[year_num]
-            if year[stock_name] != None:
-                out.append(Stock(year[stock_name], stock_name, year_num))
-        out.sort(key=lambda x: x.year, reverse=True)
-        return out
-
-class Year:
-    def __init__(self, stocks, year) -> None:
-        self.year = int(year)
-        self.stocks = {name:Stock(details, name, year) for (name,details) in stocks.items()}
-
-    def __repr__(self) -> str:
-        return ">" + str(self.year) + ": " + str(self.stocks)
-
-class Stock:
-    def __init__(self, raw, name, year) -> None:
-        self.name = name
-        self.year = int(year)
-        self.price = raw['price']
-        self.qty = raw['qty']
-    
-    def __repr__(self) -> str:
-        return "{" + self.name + ": " + str(self.year) + " | "  + str(self.price) + " | " + str(self.qty) + "}"
-
 class Firm:
-    def __init__(self, stock) -> None:
-        # list of trades (buy, sell)
-        self.trades = [];
-        self.curr = (None, stock)
-        self.curr_price = (stock.price, stock.price)
-
-    def curr_buy_price(self) -> int:
-        return self.curr_price[0];
-
-    def curr_sell_price(self) -> int:
-        return self.curr_price[1];
+    def __init__(self) -> None:
+        self.curr_min = {"price": 10000000}
+        self.curr_max = {"price": 0}
+        self.trades = []
     
-    def set_buy(self):
-        pass
+    def set_min(self, info, year) -> None:
+        info['year'] = year
+        self.curr_min = info
 
+    def set_max(self, info, year) -> None:
+        info['year'] = year
+        self.curr_max = info
+    
+    def compare_min(self, info) -> int:
+        return self.curr_min['price'] - info['price']
+    
+    def compare_max(self, info) -> int:
+        return self.curr_max['price'] - info['price']
 
-def parse(data):
+    def add_trade(self) -> tuple:
+        if self.curr_min['price'] >= self.curr_max['price']:
+            return None
+        if self.curr_min['year'] >= self.curr_max['year']:
+            return None
+        t = (self.curr_min, self.curr_max)
+        self.trades.append(t)
+        return t
+
+    def __repr__(self) -> str:
+        return "min: {}, max: {}, trades: {}".format(self.curr_min, self.curr_max, self.trades)
+    
+
+def parse(data) -> list:
     cases = [Case(i['energy'], i['capital'], i['timeline']) for i in data]
     return cases
 
-def earn(firm, buy, sell) -> int:
-    return firm[buy].qty * (firm[sell].price - firm[buy].price)
+def getAllFirms(timeline, firms) -> dict:
+    if len(timeline) <= 0:
+        return firms
+    new_firms = {name : Firm() for name in timeline[0][1]}
+    firms.update(new_firms)
+    return getAllFirms(timeline[1:], firms)
 
-def check(case):
-    max_en = case.energy / 2
-    en = 0
-    timeline = case.timeline
-    size = len(timeline)
-    db = {name : None for (name, stock) in timeline[0].stocks.items()}
-    print(db)
+def track_all(energy, timeline, firms):
+    if len(timeline) == 0 or energy < 0:
+        return
+    year_num = timeline[0][0]
+    this_year = timeline[0][1]
+    for (name, firm) in firms.items():
+        if name in this_year:
+            firm.set_max(this_year[name], year_num)
+    track(energy, timeline[1:], firms, timeline[0][0])
+
+# gets the list of peaks and troughs
+def track(energy, timeline, firms, year):
+    if len(timeline) == 0 or energy < 0:
+        return
+    year_num = timeline[0][0]
+    this_year = timeline[0][1]
+    for (name, firm) in firms.items():
+        if not name in this_year:
+            continue
+        if firm.compare_max(this_year[name]) < 0:
+            firm.set_max(this_year[name], year_num)
+        if firm.compare_min(this_year[name]) > 0:
+            firm.set_min(this_year[name], year_num)
+        else:
+            firm.add_trade()
+        if len(timeline) == 1:
+            firm.add_trade()
+    track(energy - (year - year_num), timeline[1:], firms, year_num)
+
 
 @app.route('/stonks', methods=['POST'])
 def evaluateStonks():
     data = request.get_json()
-    logging.info("data sent for evaluation {}".format(data))
     cases = parse(data)
     for case in cases:
-        check(case)
-        # print(check("Apple", case, case.energy))
-    return json.dumps(3)
+        firms = getAllFirms(case.timeline, {})
+        track_all(case.energy / 2, case.timeline, firms)
+        for (f, firm) in firms.items():
+            print(f, firm)
+    # logging.info("My result :{}".format(result))
+    return json.dumps(None)
