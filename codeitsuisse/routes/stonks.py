@@ -1,9 +1,8 @@
-from codeitsuisse.routes.stonks_old import Year
 from datetime import time
 import logging
 import json
 
-from flask import request, jsonify
+from flask import request, jsonify, Response
 
 from codeitsuisse import app
 
@@ -118,5 +117,4 @@ def evaluateStonks():
                 if cost <= case.capital: 
                     case.capital -= cost
                     actions.append(action)
-            pass
-    return json.dumps(actions)
+    return Response(json.dumps(actions), mimetype="application/json")
