@@ -20,7 +20,7 @@ def evaluateDecoder():
         print(h)
     inc = 0
     #guess = list(range(inc, num_slots + inc))
-    guess = ['e', 'w', 'd', 'p', 'u']
+    guess = ['e', 'w', 'd', 'u', 'c']
 
     logging.info("My guess :{}".format(guess))
     return json.dumps({"answer" : guess})
