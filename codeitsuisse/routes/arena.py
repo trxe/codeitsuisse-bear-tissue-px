@@ -13,7 +13,9 @@ def evaluateArena():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
     battleId = data.get("battleId")
-    print(get_data(battleId))
+    print(battleId)
+    #print(get_data(battleId))
+
     logging.info("My result :{}".format(battleId))
     return json.dumps(battleId)
 
